@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -15,7 +16,7 @@ public class Vehicle {
 	private long id;
 	private String VehicleNumber;
 	private String VehicleType;
-	@OneToOne
+	@OneToMany
 	@JoinColumn(name="user_id")
 	private User user;
 	public long getId() {
@@ -41,6 +42,10 @@ public class Vehicle {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Object getModel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
