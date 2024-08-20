@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -13,16 +13,16 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public Page<Student> getStudentsByCourseId(Long courseId, Pageable pageable) {
-        return studentRepository.findByCourseId(courseId, pageable);
-    }
-
-    public Optional<Student> getStudentByIdAndCourseId(Long studentId, Long courseId) {
-        return studentRepository.findById(studentId).filter(student -> student.getCourse().getId().equals(courseId));
-    }
-
     public Student saveStudent(Student student) {
         return studentRepository.save(student);
+    }
+
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElse(null);
+    }
+
+    public Page<Student> getAllStudents(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
 
     public void deleteStudent(Long id) {
